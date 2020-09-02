@@ -20,12 +20,13 @@ class AddUserActivity : AppCompatActivity() {
 
         addUserButton.setOnClickListener{
             if(userName.text.isNullOrBlank()){
-
+                Toast.makeText(this, "Favor insira um nome válido!", Toast.LENGTH_SHORT).show()
+            }else {
+                val returnIntent = Intent()
+                returnIntent.putExtra("userName", userName.text.toString())
+                setResult(Activity.RESULT_OK, returnIntent)
+                finish()
             }
-            val returnIntent = Intent()
-            returnIntent.putExtra("userName", userName.text.toString())
-            setResult(Activity.RESULT_OK, returnIntent)
-            finish()
         }
     }
 }

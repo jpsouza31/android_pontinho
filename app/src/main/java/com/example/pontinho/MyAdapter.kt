@@ -15,10 +15,11 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.item_recycler_view.view.*
 
 class MyAdapter(
-    private val contactList: ArrayList<User>,
-    private val context: Context?,
+    var contactList: ArrayList<User>,
+    val context: Context?,
     var clickListener: OnItemClick
 ): RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -46,18 +47,17 @@ class MyAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val user: User = contactList.get(position)
 
-
-        if(user.score >= 100){
-            user.score = 0
-            user.isGameOver = true
-
-        }
+//        if(user.score >= 100){
+//            user.score = 0
+//            user.isGameOver = true
+//        }
 
         if(user.isGameOver) holder.itemView.setBackgroundColor(context!!.getColor(R.color.colorLostPlayer))
+        else holder.itemView.setBackgroundColor(context!!.getColor(R.color.colorAccent))
 
         holder.name.text = user.name
         holder.score.text = user.score.toString()
-        holder.photo.setImageResource(user.photo)
+        holder.photo.setImageResource(user.photo!!)
 
         holder.clickEvent(user, clickListener)
     }
